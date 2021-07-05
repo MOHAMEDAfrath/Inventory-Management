@@ -24,6 +24,8 @@ namespace IventoryManagement
         List<Rice> UpdateInventory(List<Rice> ricelist);
         List<Wheat> UpdateInventory(List<Wheat> wheatlist);
         List<Pulses> UpdateInventory(List<Pulses> pulselist);
+        int InventoryCost(int price, int weight);
+        void InventoryDetails(List<Rice> ricelist, List<Wheat> wheatlist, List<Pulses> pulselist);
 
     }
 }

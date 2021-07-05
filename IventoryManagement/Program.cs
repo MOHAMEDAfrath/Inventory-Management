@@ -10,13 +10,15 @@ namespace IventoryManagement
         {
 
             Console.WriteLine("Welcome to Inventory Management Program");
+            //Getting the file path of json file.
             string filepath = @"C:\Users\afrat\source\repos\IventoryManagement\IventoryManagement\InventoryDetails.json";
             InventoryManager inventoryManager = new InventoryManager();
+            //Reads the data as objects from json file.
             InventoryContents inventoryContents = JsonConvert.DeserializeObject<InventoryContents>(File.ReadAllText(filepath));
             Console.WriteLine("Enter 1 to get details about Rice!");
             Console.WriteLine("Enter 2 to get details about Wheat!");
             Console.WriteLine("Enter 3 to get details about Pulses!");
-
+            Console.WriteLine("Enter 4 to Display the complete inventory!");
             int option = Convert.ToInt32(Console.ReadLine());
             switch (option)
             {
@@ -33,6 +35,7 @@ namespace IventoryManagement
                             break;
                         case 2:
                             inventoryManager.AddToInventory(inventoryContents.ricelist);
+                            //Writes the updated values to the file.
                             File.WriteAllText(filepath,JsonConvert.SerializeObject(inventoryContents));
                             Console.WriteLine("After Insertion:");
                             inventoryManager.DisplayTheContentInInventory(inventoryContents.ricelist);
@@ -112,6 +115,9 @@ namespace IventoryManagement
                             inventoryManager.DisplayTheContentInInventory(inventoryContents.pulselist);
                             break;
                     }
+                    break;
+                case 4:
+                    inventoryManager.InventoryDetails(inventoryContents.ricelist, inventoryContents.wheatlist, inventoryContents.pulselist);
                     break;
             }
         

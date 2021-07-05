@@ -12,7 +12,9 @@ namespace IventoryManagement
         /// <summary>
         /// Adds to inventory method.
         /// </summary>
-    
+        int totalpulseInventory = 0;
+        int totalwheatInventory = 0;
+        int totalriceInventory = 0;
         public List<Rice> AddToInventory(List<Rice> ricelist)
         {
             Rice rice = new Rice();
@@ -109,7 +111,7 @@ namespace IventoryManagement
         /// </summary>
         public void DisplayTheContentInInventory(List<Rice> ricelist)
         {
-            int totalriceInventory = 0;
+           
             Console.WriteLine("***   Rice Varieties   ***");
             foreach(var rices in ricelist)
             {
@@ -118,7 +120,7 @@ namespace IventoryManagement
                 Console.WriteLine("Rice Weight: {0}", rices.weight);
                 Console.WriteLine("Rice Type: {0}", rices.type);
                 Console.WriteLine(" ");
-                totalriceInventory += rices.price * rices.weight;
+                totalriceInventory += InventoryCost(rices.price,rices.weight);
             }
             Console.WriteLine("---------------------");
             Console.WriteLine("Total Rice Cost: {0}", totalriceInventory);
@@ -126,7 +128,7 @@ namespace IventoryManagement
         }
         public void DisplayTheContentInInventory(List<Wheat> wheatlist)
         {
-            int totalwheatInventory = 0;
+            
             Console.WriteLine("***   Wheat Varieties   ***");
             foreach (var wheats in wheatlist)
             {
@@ -135,7 +137,7 @@ namespace IventoryManagement
                 Console.WriteLine("Wheat Weight: {0}", wheats.weight);
                 Console.WriteLine("Wheat Type: {0}", wheats.type);
                 Console.WriteLine(" ");
-                totalwheatInventory += wheats.price * wheats.weight;
+                totalwheatInventory += InventoryCost(wheats.price,wheats.weight);
 
             }
             Console.WriteLine("---------------------");
@@ -144,7 +146,7 @@ namespace IventoryManagement
         }
         public void DisplayTheContentInInventory(List<Pulses> pulselist)
         {
-            int totalpulseInventory = 0;
+            
             Console.WriteLine("***   Pulse Varieties   ***");
             foreach (var pulses in pulselist)
             {
@@ -153,10 +155,30 @@ namespace IventoryManagement
                 Console.WriteLine("Pulse Weight: {0}", pulses.weight);
                 Console.WriteLine("Pulse Type : {0}", pulses.type);
                 Console.WriteLine(" ");
-                totalpulseInventory += pulses.price * pulses.weight;
+                totalpulseInventory += InventoryCost(pulses.price,pulses.weight);
             }
             Console.WriteLine("----------------------");
             Console.WriteLine("Total Pulse Cost: {0}", totalpulseInventory);
+        }
+        public int InventoryCost(int price,int weight)
+        {
+            return weight * price;
+
+        }
+        /// <summary>
+        /// Inventories the details with total inventory cost.
+        /// </summary>
+        /// <param name="ricelist">The ricelist.</param>
+        /// <param name="wheatlist">The wheatlist.</param>
+        /// <param name="pulselist">The pulselist.</param>
+        public void InventoryDetails(List<Rice> ricelist,List<Wheat> wheatlist,List<Pulses> pulselist)
+        {
+            DisplayTheContentInInventory(ricelist);
+            DisplayTheContentInInventory(wheatlist);
+            DisplayTheContentInInventory(pulselist);
+            Console.WriteLine(" ");
+            Console.WriteLine("The total inventory cost is "+(totalpulseInventory+totalriceInventory+totalwheatInventory));
+            
         }
 
     }
